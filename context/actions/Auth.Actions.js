@@ -18,21 +18,26 @@ export const loginUser = (user, dispatch) => {
     })
     .then((res) => res.json())
     .then((data) => {
-        if (data) {
+        if (data.token) { // Ensure that data.token is present
             const token = data.token;
             AsyncStorage.setItem("jwt", token)
-            const decoded = jwt_decode(token)
-            dispatch(setCurrentUser(decoded, user))
+                .then(() => {
+                    const decoded = jwt_decode(token); // Decode the token
+                    dispatch(setCurrentUser(decoded, user));
 
-            Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: "Successfully Login",
-              text2: "You can now explore our shop!",
-            });
-
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "Successfully Login",
+                        text2: "You can now explore our shop!",
+                    });
+                })
+                .catch((err) => {
+                    console.error("Error saving token to AsyncStorage:", err);
+                    logoutUser(dispatch);
+                });
         } else {
-           logoutUser(dispatch)
+            logoutUser(dispatch);
         }
     })
     .catch((err) => {
@@ -40,13 +45,54 @@ export const loginUser = (user, dispatch) => {
             topOffset: 60,
             type: "error",
             text1: "Please provide correct credentials",
-            text2: ""
+            text2: "",
         });
 
-        console.log(err)
-        logoutUser(dispatch)
+        console.error("Login error:", err);
+        logoutUser(dispatch);
     });
 };
+
+// export const loginUser = (user, dispatch) => {
+//     fetch(`${baseURL}users/login`, {
+//         method: "POST",
+//         body: JSON.stringify(user),
+//         headers: {
+//             Accept: "application/json",
+//             "Content-Type": "application/json",
+//         },
+//     })
+//     .then((res) => res.json())
+//     .then((data) => {
+//         if (data) {
+//             const token = data.token;
+//             AsyncStorage.setItem("jwt", token)
+//             const decoded = jwt_decode(token)
+//             dispatch(setCurrentUser(decoded, user))
+
+//             Toast.show({
+//               topOffset: 60,
+//               type: "success",
+//               text1: "Successfully Login",
+//               text2: "You can now explore our shop!",
+//             });
+
+//         } else {
+//            logoutUser(dispatch)
+//         }
+//     })
+//     .catch((err) => {
+//         Toast.show({
+//             topOffset: 60,
+//             type: "error",
+//             text1: "Please provide correct credentials",
+//             text2: ""
+//         });
+
+//         console.log(err)
+//         logoutUser(dispatch)
+//     });
+// };
 
 export const getUserProfile = (id) => {
     fetch(`${baseURL}users/${id}`, {
@@ -62,9 +108,23 @@ export const getUserProfile = (id) => {
 }
 
 export const logoutUser = (dispatch) => {
-    AsyncStorage.removeItem("jwt");
-    dispatch(setCurrentUser({}))
-}
+    console.log("Logging out user...");
+    
+    AsyncStorage.removeItem("jwt")
+        .then(() => {
+            console.log("JWT removed from AsyncStorage");
+            dispatch(setCurrentUser({}));
+            console.log("User state reset to empty object");
+        })
+        .catch((err) => {
+            console.error("Error removing JWT from AsyncStorage:", err);
+        });
+};
+
+// export const logoutUser = (dispatch) => {
+//     AsyncStorage.removeItem("jwt");
+//     dispatch(setCurrentUser({}))
+// }
 
 export const setCurrentUser = (decoded, user) => {
     return {

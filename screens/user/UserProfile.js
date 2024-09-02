@@ -14,16 +14,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../context/store/AuthGlobal";
-import CustomButton from "../../shared/CustomButton";
 import { logoutUser } from "../../context/actions/Auth.Actions";
-
+import { useSelector, useDispatch } from "react-redux";
 
 const UserProfile = () => {
   const navigation = useNavigation();
   const context = useContext(AuthGlobal);
+  const dispatch = useDispatch();
   const [userProfile, setUserProfile] = useState("");
   const [image, setImage] = useState("");
-  
 
   useFocusEffect(
     useCallback(() => {
@@ -89,23 +88,19 @@ const UserProfile = () => {
               {userProfile ? userProfile.email : ""}
             </Text>
           </View>
-
-        
         </View>
-        <View className="pt-72 ">
-        <TouchableOpacity
-  onPress={async () => {
-    await AsyncStorage.removeItem("jwt");
-    logoutUser(context.dispatch);
-    navigation.navigate("Login");
-  }}
->
-  <CustomButton
-    title="Sign Out"
-    containerStyles="mt-7"
-  />
-</TouchableOpacity>
-          </View>
+        <View className="pt-72">
+          <TouchableOpacity
+            className="bg-[#13DAE9] rounded-xl min-h-[62px] justify-center items-center"
+            onPress={async () => {
+              await AsyncStorage.removeItem("jwt");
+              logoutUser(context.dispatch);
+              navigation.navigate("Login");
+            }}
+          >
+            <Text className="text-white font-semibold text-lg">Sign Out</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

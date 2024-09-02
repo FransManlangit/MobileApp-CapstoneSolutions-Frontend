@@ -1,6 +1,6 @@
 import React from "react";
 
-import { View, Text, Image, ScrollView } from "react-native";
+import { View, Text, Image, ScrollView, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -42,8 +42,8 @@ export default function Start({ navigation }) {
             </View>
           </View>
         </View>
-      </ScrollView>
-      <StatusBar backgroundColor="#161622" style="light" />
+      </ScrollView> 
+      <StatusBar backgroundColor="#B1B6B7" style="light" />
     </SafeAreaView>
   );
 }
