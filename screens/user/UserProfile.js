@@ -16,6 +16,12 @@ import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../context/store/AuthGlobal";
 import { logoutUser } from "../../context/actions/Auth.Actions";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  CubeIcon,
+  Cog6ToothIcon,
+  SquaresPlusIcon,
+  ArchiveBoxIcon,
+} from "react-native-heroicons/solid";
 
 const UserProfile = () => {
   const navigation = useNavigation();
@@ -64,10 +70,10 @@ const UserProfile = () => {
 
   console.log(context, "context");
   return (
-    <SafeAreaView className="bg-white h-full p-4">
+    <SafeAreaView className="bg-white h-full w-full">
       <ScrollView>
-        <View className="px-5 flex-row items-center space-x-4 py-20">
-          <View className="rounded-full pb-8">
+        <View className="px-4 flex-row items-center space-x-4 py-8">
+          <View className="rounded-full ">
             <Image
               className="rounded-full h-28 w-28"
               source={
@@ -89,7 +95,39 @@ const UserProfile = () => {
             </Text>
           </View>
         </View>
-        <View className="pt-72">
+        <View className="items-center pb-4">
+          <TouchableOpacity
+            className="p-2 bg-transparent rounded-full border-2 border-[#B1B6B7]"
+            onPress={() =>
+              navigation.navigate("UpdateProfile", { user: userProfile })
+            }
+          >
+            <Text className="text-zinc-600 font-normal text-lg underline decoration-black">
+              Edit Profile
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="pl-16 flex-row space-x-6 items-center">
+          <TouchableOpacity className="items-center">
+            <CubeIcon color="#B1B6B7" size={35} />
+            <Text className="text-xs pt-2">Orders</Text>
+          </TouchableOpacity>
+          <View className="h-16 w-px bg-gray-300 my-4" />
+          <TouchableOpacity className="items-center">
+            <SquaresPlusIcon color="#B1B6B7" size={35} />
+            <Text className="text-xs pt-2">Pricing Plans</Text>
+          </TouchableOpacity>
+          <View className="h-16 w-px bg-gray-300 my-4" />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Settings")}
+            className="items-center"
+          >
+            <Cog6ToothIcon color="#B1B6B7" size={35} />
+            <Text className="text-xs pt-2">Settings</Text>
+          </TouchableOpacity>
+        </View>
+        {/* <View className="pt-72">
           <TouchableOpacity
             className="bg-[#13DAE9] rounded-xl min-h-[62px] justify-center items-center"
             onPress={async () => {
@@ -100,7 +138,7 @@ const UserProfile = () => {
           >
             <Text className="text-white font-semibold text-lg">Sign Out</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   );
