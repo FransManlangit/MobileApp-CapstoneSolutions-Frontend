@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Image, View, FlatList, Dimensions, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
