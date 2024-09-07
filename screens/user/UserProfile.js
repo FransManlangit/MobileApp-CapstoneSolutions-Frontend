@@ -114,7 +114,9 @@ const UserProfile = () => {
             <Text className="text-xs pt-2">Orders</Text>
           </TouchableOpacity>
           <View className="h-16 w-px bg-gray-300 my-4" />
-          <TouchableOpacity className="items-center">
+          <TouchableOpacity className="items-center"
+            onPress={() => navigation.navigate("PricingPlans")}
+          >
             <SquaresPlusIcon color="#B1B6B7" size={35} />
             <Text className="text-xs pt-2">Pricing Plans</Text>
           </TouchableOpacity>
