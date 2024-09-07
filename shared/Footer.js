@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <View className="py-8 bg-gray-100">
+    <View className="py-8 bg-white">
       <Text className="text-[#13DAE9] font-bold text-2xl mb-4 text-center">
         Meet the Developers
       </Text>
@@ -72,7 +72,14 @@ const Footer = () => {
       </View>
       </ScrollView>
       </View>
-      
+      <View className="items-center">
+      <Image
+            className="h-16"
+            resizeMode="contain"
+            source={require("../assets/images/StartLogo.png")}
+          />
+      <Text className="text-center font-semibold">Thanks for being with us.</Text>
+      </View>
     </View>
   );
 };

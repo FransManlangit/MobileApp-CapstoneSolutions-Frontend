@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Text, Center, FlatList } from "native-base";
-
+import { StatusBar } from "expo-status-bar";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
 import ProductList from "./ProductList";
@@ -76,7 +76,7 @@ const ProductContainer = () => {
         </View>
       ) : (
         <SafeAreaView>
-          <ScrollView className="bg-gray-100">
+          <ScrollView className="bg-white">
             <View className="bg-[#B1B6B7] flex-1 p-4 flex-row">
               <View>
             <Text className="text-white font-bold text-base">Create the screens</Text>
@@ -159,6 +159,7 @@ const ProductContainer = () => {
             </View>
             <Footer/>
           </ScrollView>
+          <StatusBar backgroundColor="#B1B6B7" style="light" />
         </SafeAreaView>
       )}
     </>

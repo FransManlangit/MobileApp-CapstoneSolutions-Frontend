@@ -61,9 +61,9 @@ const SingleProduct = (props) => {
             className="rounded ml-4 mt-4 "
             onPress={() => navigation.goBack()}
           >
-            <View className="flex-row items-center rounded-full p-1">
-              <ChevronLeftIcon size={wp(6)} color="black" />
-              <Text className="text-black font-bold">Back</Text>
+            <View className="flex-row items-center rounded-full bg-zinc-200 p-1">
+              <ChevronLeftIcon size={wp(6)} color="gray" />
+              
             </View>
           </TouchableOpacity>
         </SafeAreaView>
