@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import Toast from "react-native-toast-message";
 import { AntDesign } from "@expo/vector-icons";
+import { ExclamationCircleIcon } from "react-native-heroicons/solid";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -76,21 +77,20 @@ const Login = () => {
                 style={{ minHeight: Dimensions.get("window").height - 100 }}
               >
                 <View className="items-center ">
-                <Image
+                  <Image
                     className="w-[150px] h-[120px]"
-            resizeMode="contain"
-                  source={require("../../assets/images/StartLogo.png")}
-                 
-                />
+                    resizeMode="contain"
+                    source={require("../../assets/images/StartLogo.png")}
+                  />
                 </View>
-                
-                 <Text className="text-2xl font-semibold text-black mt-10 font-semibold">
-            Log in to Capstone Solutions
-          </Text>
+
+                <Text className="text-2xl font-semibold text-black mt-10 font-semibold">
+                  Log in to Capstone Solutions
+                </Text>
+
+                {/* Email Field */}
                 <View className="space-y-2 mt-7">
-                  <Text className="text-base text-black font-medium">
-                    Email
-                  </Text>
+                  <Text className="text-base text-black font-medium">Email</Text>
                   <View
                     className={`w-full h-16 px-4 bg-black-100 rounded-2xl border ${
                       touched.email && errors.email
@@ -109,10 +109,14 @@ const Login = () => {
                     />
                   </View>
                   {touched.email && errors.email && (
-                    <Text className="text-red-500">{errors.email}</Text>
+                    <View className="flex flex-row items-center space-x-1">
+                      <ExclamationCircleIcon size={15} color="red" />
+                      <Text className="text-red-500">{errors.email}</Text>
+                    </View>
                   )}
                 </View>
 
+                {/* Password Field */}
                 <View className="space-y-2 mt-7">
                   <Text className="text-base text-black font-medium">
                     Password
@@ -145,19 +149,21 @@ const Login = () => {
                     </TouchableOpacity>
                   </View>
                   {touched.password && errors.password && (
-                    <Text className="text-red-500">{errors.password}</Text>
+                    <View className="flex flex-row items-center space-x-1">
+                      <ExclamationCircleIcon size={15} color="red" />
+                      <Text className="text-red-500">{errors.password}</Text>
+                    </View>
                   )}
                 </View>
 
+                {/* Submit Button */}
                 <View className="py-10">
                   <TouchableOpacity
                     onPress={() => handleSubmit()}
                     activeOpacity={0.7}
                     className="bg-[#13DAE9] rounded-xl min-h-[62px] justify-center items-center"
                   >
-                    <Text className="text-white font-semibold text-lg">
-                      Guest
-                    </Text>
+                    <Text className="text-white font-semibold text-lg">Guest</Text>
                   </TouchableOpacity>
                 </View>
               </View>
